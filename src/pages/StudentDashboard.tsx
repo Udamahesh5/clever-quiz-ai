@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -79,6 +78,27 @@ const StudentDashboard = () => {
       color: "text-blue-600"
     }
   ];
+
+  const handleBrowseCourses = () => {
+    console.log("Browsing course library...");
+    // Navigate to courses page or show courses modal
+    navigate("/student");
+  };
+
+  const handleDiagnosticTest = () => {
+    console.log("Starting diagnostic test...");
+    navigate("/quiz/diagnostic");
+  };
+
+  const handleViewCalendar = () => {
+    console.log("Opening study calendar...");
+    // Could integrate with Google Calendar or show internal calendar
+  };
+
+  const handleReviewQuiz = (quizId: number) => {
+    console.log(`Reviewing quiz ${quizId}...`);
+    navigate(`/quiz/${quizId}/review`);
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-green-50">
@@ -204,7 +224,9 @@ const StudentDashboard = () => {
                         </div>
                         <div className="text-right">
                           <div className="text-2xl font-bold">{quiz.score}%</div>
-                          <Button variant="ghost" size="sm">Review</Button>
+                          <Button variant="ghost" size="sm" onClick={() => handleReviewQuiz(quiz.id)}>
+                            Review
+                          </Button>
                         </div>
                       </div>
                     ))}
@@ -247,7 +269,7 @@ const StudentDashboard = () => {
                   <div className="text-center">
                     <div className="text-4xl font-bold text-orange-600 mb-2">🔥 7</div>
                     <p className="text-gray-600 mb-4">Days in a row!</p>
-                    <Button variant="outline" className="w-full">
+                    <Button variant="outline" className="w-full" onClick={handleViewCalendar}>
                       View Calendar
                     </Button>
                   </div>
@@ -261,11 +283,11 @@ const StudentDashboard = () => {
                 </CardHeader>
                 <CardContent>
                   <div className="space-y-2">
-                    <Button variant="outline" className="w-full justify-start">
+                    <Button variant="outline" className="w-full justify-start" onClick={handleBrowseCourses}>
                       <BookOpen className="w-4 h-4 mr-2" />
                       Browse Course Library
                     </Button>
-                    <Button variant="outline" className="w-full justify-start">
+                    <Button variant="outline" className="w-full justify-start" onClick={handleDiagnosticTest}>
                       <Target className="w-4 h-4 mr-2" />
                       Take Diagnostic Test
                     </Button>

@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -104,6 +103,34 @@ const TeacherDashboard = () => {
     }
   ];
 
+  const handleCreateQuiz = () => {
+    console.log("Creating new quiz...");
+    // Navigate to quiz creation page
+    navigate("/quiz/create");
+  };
+
+  const handleManageStudents = () => {
+    console.log("Managing students...");
+    // Navigate to student management page
+    navigate("/students");
+  };
+
+  const handleCreateCourse = () => {
+    console.log("Creating new course...");
+    // Navigate to course creation page
+    navigate("/courses/create");
+  };
+
+  const handleExportReports = () => {
+    console.log("Exporting reports...");
+    // Trigger report export functionality
+  };
+
+  const handleViewCourseDetails = (courseId: number) => {
+    console.log(`Viewing details for course ${courseId}...`);
+    navigate(`/courses/${courseId}`);
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-green-50">
       <Navigation />
@@ -117,11 +144,11 @@ const TeacherDashboard = () => {
               <p className="text-gray-600">Monitor student progress and AI-powered insights</p>
             </div>
             <div className="flex gap-3">
-              <Button variant="outline">
+              <Button variant="outline" onClick={handleExportReports}>
                 <FileText className="w-4 h-4 mr-2" />
                 Export Reports
               </Button>
-              <Button className="bg-gradient-to-r from-blue-600 to-green-600">
+              <Button className="bg-gradient-to-r from-blue-600 to-green-600" onClick={handleCreateCourse}>
                 <Plus className="w-4 h-4 mr-2" />
                 Create Course
               </Button>
@@ -188,7 +215,11 @@ const TeacherDashboard = () => {
                               </div>
                               <div className="flex items-center gap-2">
                                 <BarChart3 className="w-4 h-4" />
-                                <Button variant="link" className="p-0 h-auto text-blue-600">
+                                <Button 
+                                  variant="link" 
+                                  className="p-0 h-auto text-blue-600"
+                                  onClick={() => handleViewCourseDetails(course.id)}
+                                >
                                   View Details
                                 </Button>
                               </div>
@@ -273,11 +304,11 @@ const TeacherDashboard = () => {
                     </CardHeader>
                     <CardContent>
                       <div className="space-y-2">
-                        <Button variant="outline" className="w-full justify-start">
+                        <Button variant="outline" className="w-full justify-start" onClick={handleCreateQuiz}>
                           <Plus className="w-4 h-4 mr-2" />
                           Create New Quiz
                         </Button>
-                        <Button variant="outline" className="w-full justify-start">
+                        <Button variant="outline" className="w-full justify-start" onClick={handleManageStudents}>
                           <Users className="w-4 h-4 mr-2" />
                           Manage Students
                         </Button>
